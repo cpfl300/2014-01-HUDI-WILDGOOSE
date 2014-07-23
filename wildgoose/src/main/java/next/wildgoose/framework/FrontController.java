@@ -18,6 +18,8 @@ import next.wildgoose.utility.Constants;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -60,8 +62,11 @@ public class FrontController extends HttpServlet {
 	
 	// 요청(request path)에 해당하는 BackController 구현체를 받아오기
 	private BackController getBackController(HttpServletRequest request) {
-		ServletContext context = request.getServletContext();
-		Map<String, BackController> controllerMap = (Map<String, BackController>) context.getAttribute("controllerMap");
+		// 이 부분 spring으로 수정하기
+		
+		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
+		
+		Map<String, BackController> controllerMap = context.getBean("controllerMap", Map.class);
 		Uri uri = new Uri(request);
 		BackController result = null;
 		result = controllerMap.get(uri.getPrimeResource());
@@ -69,6 +74,9 @@ public class FrontController extends HttpServlet {
 			result = controllerMap.get("error");
 		}
 		return result;
+		
+		
+		
 	}
 	
 	private View createView(HttpServletRequest request, Result resultData) {

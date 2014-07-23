@@ -30,7 +30,25 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
 	<display-name>Archetype Created Web Application</display-name>
+	<!-- Spring -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/controller.xml
+		</param-value>
+	</context-param>
 
+	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>
+			org.springframework.web.context.support.XmlWebApplicationContext
+		</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
 	<!-- Servlets -->
 	<servlet>
 		<display-name>FrontController</display-name>
@@ -113,9 +131,6 @@
 	</listener>
 	<listener>
 		<listener-class>next.wildgoose.dao.DaoListener</listener-class>
-	</listener>
-	<listener>
-		<listener-class>next.wildgoose.backcontroller.BackControllerListener</listener-class>
 	</listener>
 	<listener>
 		<listener-class>next.wildgoose.web.WebListener</listener-class>
