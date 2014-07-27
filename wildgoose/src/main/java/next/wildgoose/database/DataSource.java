@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 // THIS IS SINGLETON PATTERN
 public class DataSource {
@@ -14,13 +15,14 @@ public class DataSource {
 	private BasicDataSource bds;
 	
 	// CALLED BY DatabaseContextListener
+	@Autowired
 	public static void init(String driver, String userName, String userPw, String dbUrl) {
 		dataSource = new DataSource(driver, userName, userPw, dbUrl);
 	}
 	
 	// THIS CONSTRUCTOR RUNS ONLY ONCE
-	private DataSource(String driver, String userName, String userPw,
-			String dbUrl) {
+	// 이 부분을 spring으로 injection
+	private DataSource(String driver, String userName, String userPw, String dbUrl) {
 		bds = new BasicDataSource();
 		bds.setDriverClassName(driver);
 		bds.setUsername(userName);

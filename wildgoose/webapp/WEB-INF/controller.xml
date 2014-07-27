@@ -10,6 +10,7 @@
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
     
     <context:component-scan base-package="next.wildgoose.backcontroller" />
+    <context:component-scan base-package="next.wildgoose.dao" />
     
     <util:map id="controllerMap" map-class="java.util.HashMap">
     	<entry key="" value-ref="searchController" />

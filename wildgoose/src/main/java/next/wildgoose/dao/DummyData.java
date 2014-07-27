@@ -2,8 +2,11 @@ package next.wildgoose.dao;
 
 import java.util.Random;
 
+import org.springframework.stereotype.Component;
+
 import next.wildgoose.dto.StatPoints;
 
+@Component
 public class DummyData{
 	
 	public StatPoints getStatPoints(int reporterId) {

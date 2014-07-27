@@ -82,7 +82,7 @@
     popup.prototype.afteropenCallbackRef = function(event){
 //    	debugger;
 		//console.log(event);
-		if(event.propertyName === "-webkit-transform" && this.status.data === false){	
+    	if(event.propertyName === "transform" && this.status.data === false){
 			
 			
 			var popupWrapAnimation = document.querySelector(".popup-wrap.popup-animation");

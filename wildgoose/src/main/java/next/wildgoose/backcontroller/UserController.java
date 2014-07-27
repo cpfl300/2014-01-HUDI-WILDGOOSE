@@ -14,11 +14,15 @@ import next.wildgoose.framework.utility.Uri;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserController extends AuthController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class.getName());
+	
+	@Autowired
+	FavoriteDAO favoriteDao;
 	
 	@Override
 	public Result execute(HttpServletRequest request) {
@@ -54,17 +58,12 @@ public class UserController extends AuthController {
 	
 	private Result isFavorite(HttpServletRequest request, String userId,
 			int reporterId) {
-		ServletContext context = request.getServletContext();
-		FavoriteDAO favoriteDao =  (FavoriteDAO) context.getAttribute("FavoriteDAO");
 		SimpleResult result = new SimpleResult(true);
 		result.setData("bool", favoriteDao.isFavorite(userId, reporterId));
 		return result;
 	}
 	
 	private Result getFavorites(HttpServletRequest request, String userId) {
-		ServletContext context = request.getServletContext();
-		
-		FavoriteDAO favoriteDao =  (FavoriteDAO) context.getAttribute("FavoriteDAO");
 		List<Reporter> reporters = favoriteDao.findFavoriteReporters(userId);
 		
 		FavoriteResult favoriteResult = new FavoriteResult();
