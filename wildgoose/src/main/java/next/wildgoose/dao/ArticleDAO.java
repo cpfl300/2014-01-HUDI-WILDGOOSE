@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import next.wildgoose.dto.Article;
@@ -15,8 +16,13 @@ import next.wildgoose.framework.dao.template.RowMapper;
 
 @Component
 public class ArticleDAO {
+	
+	@Autowired
+	JdbcTemplate t;
+	
 	static RowMapper articlesRm = new RowMapper() {
-
+		
+		
 		@Override
 		public Object mapRow(ResultSet rs) throws SQLException {
 			List<Article> articles = new ArrayList<Article>();
@@ -37,7 +43,6 @@ public class ArticleDAO {
 	};
 	
 	public List<Article> findArticlesById(final int reporterId) {
-		JdbcTemplate t = new JdbcTemplate();
 		PreparedStatementSetter pss = new PreparedStatementSetter() {
 
 			@Override
@@ -77,7 +82,6 @@ public class ArticleDAO {
 	}
 	
 	public List<Article> findArticlesByFavorite(final String email) {
-		JdbcTemplate t = new JdbcTemplate();
 		PreparedStatementSetter pss = new PreparedStatementSetter() {
 
 			@Override
@@ -98,7 +102,6 @@ public class ArticleDAO {
 	}
 
 	public List<Article> findArticlesByFavorite(final String email, final int start, final int howMany) {
-		JdbcTemplate t = new JdbcTemplate();
 		PreparedStatementSetter pss = new PreparedStatementSetter() {
 
 			@Override
@@ -121,7 +124,6 @@ public class ArticleDAO {
 	}
 	
 	public int findNumberOfArticlesByFavorite(final String email) {
-		JdbcTemplate t = new JdbcTemplate();
 		PreparedStatementSetter pss = new PreparedStatementSetter() {
 
 			@Override

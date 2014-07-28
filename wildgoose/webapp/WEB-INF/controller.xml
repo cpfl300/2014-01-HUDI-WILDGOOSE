@@ -11,6 +11,7 @@
     
     <context:component-scan base-package="next.wildgoose.backcontroller" />
     <context:component-scan base-package="next.wildgoose.dao" />
+    <context:component-scan base-package="next.wildgoose.framework" />
     
     <util:map id="controllerMap" map-class="java.util.HashMap">
     	<entry key="" value-ref="searchController" />

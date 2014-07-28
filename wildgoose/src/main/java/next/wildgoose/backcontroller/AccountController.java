@@ -79,7 +79,7 @@ public class AccountController implements BackController {
 
 		// 비밀번호 확인
 		if (SHA256.testSHA256(accountPw + randNum).equals(oldPassword)) {
-			boolean changed = SignDAO.changePassword(email, newPassword);
+			boolean changed = signDao.changePassword(email, newPassword);
 			result = new SimpleResult(changed);
 		} else {
 			result.setMessage(Constants.MSG_WRONG_PW);

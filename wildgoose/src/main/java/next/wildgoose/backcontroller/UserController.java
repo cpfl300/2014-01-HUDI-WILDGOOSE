@@ -76,14 +76,13 @@ public class UserController extends AuthController {
 	
 	private SimpleResult modifyFavorites(String how, HttpServletRequest request, String userId) {
 		ServletContext context = request.getServletContext();
-		FavoriteDAO favDao = (FavoriteDAO) context.getAttribute("FavoriteDAO");
 		boolean success = false;
 		
 		int reporterId = Integer.parseInt(request.getParameter("reporter_id"));
 		
-		if ("add".equals(how) && favDao.addFavorite(reporterId, userId)) {
+		if ("add".equals(how) && favoriteDao.addFavorite(reporterId, userId)) {
 			success = true;
-		} else if ("remove".equals(how) && favDao.removeFavorite(reporterId, userId)) {
+		} else if ("remove".equals(how) && favoriteDao.removeFavorite(reporterId, userId)) {
 			success = true;
 		}
 		return new SimpleResult(success);

@@ -35,6 +35,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			/WEB-INF/controller.xml
+			/WEB-INF/datasource.xml
 		</param-value>
 	</context-param>
 
@@ -126,9 +127,6 @@
 	
 
 	<!-- Listeners -->
-	<listener>
-		<listener-class>next.wildgoose.database.DatabaseListener</listener-class>
-	</listener>
 	<listener>
 		<listener-class>next.wildgoose.web.WebListener</listener-class>
 	</listener>
